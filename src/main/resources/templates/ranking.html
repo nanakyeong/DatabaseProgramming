@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>독서량 순위표 - 독서 습관 커뮤니티</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+<!-- 네비게이션 -->
+<nav class="navbar">
+    <div class="logo">logo</div>
+    <ul class="nav-menu">
+        <li><a href="index.html">독서 캘린더</a></li>
+        <li><a href="quiz.html">독서 퀴즈</a></li>
+        <li><a href="ranking.html">순위표</a></li>
+
+    </ul>
+    <div class="nav-buttons">
+        <button class="btn-login">로그인</button>
+        <button class="btn-signup">회원가입</button>
+    </div>
+</nav>
+
+<!-- 히어로 섹션 -->
+<section class="hero">
+    <h1>독서량 순위표</h1>
+    <p>다른 독서가들과 함께 성장해보세요!</p>
+</section>
+
+<!-- 탭 메뉴 -->
+<section class="tabs-section">
+    <div class="tabs">
+        <button class="tab" onclick="location.href='index.html'">독서 캘린더</button>
+        <button class="tab" onclick="location.href='quiz.html'">독서 퀴즈</button>
+        <button class="tab active">순위표</button>
+    </div>
+</section>
+
+<!-- 메인 컨텐츠 -->
+<div class="ranking-container">
+    <!-- 순위 필터 탭 -->
+    <div class="ranking-tabs">
+
+    </div>
+
+    <!-- 내 순위 카드 -->
+    <div class="my-rank-card">
+        <div class="my-rank-badge">
+            <div class="rank-number">12권</div>
+            <p class="rank-label">독서량 순위</p>
+        </div>
+        <div class="user-profile">
+            <div class="profile-avatar">
+                <img src="https://i.pravatar.cc/80?img=5" alt="프로필">
+            </div>
+            <div class="profile-info">
+                <h3>나 (나)</h3>
+                <p>레벨 6위</p>
+            </div>
+        </div>
+        <div class="rank-stats">
+            <p>퀴즈 850점</p>
+        </div>
+    </div>
+
+    <!-- 독서량 순위 리스트 -->
+    <div class="ranking-section">
+        <h2>독서량 순위</h2>
+        
+        <div class="ranking-list">
+            <!-- 1등 -->
+            <div class="rank-item rank-1">
+                <div class="rank-badge gold">
+                    <span class="trophy">🏆</span>
+                </div>
+                <div class="user-info">
+                    <img src="https://i.pravatar.cc/60?img=1" alt="프로필" class="user-avatar">
+                    <div>
+                        <h4>독서왕김민수</h4>
+                        <p class="user-level">레벨 12</p>
+                    </div>
+                </div>
+                <div class="rank-score">
+                    <span class="score-value">45권</span>
+                    <span class="score-label">퀴즈 2850점</span>
+                </div>
+            </div>
+
+            <!-- 2등 -->
+            <div class="rank-item rank-2">
+                <div class="rank-badge silver">
+                    <span class="medal">🥈</span>
+                </div>
+                <div class="user-info">
+                    <img src="https://i.pravatar.cc/60?img=2" alt="프로필" class="user-avatar">
+                    <div>
+                        <h4>책벌레이영희</h4>
+                        <p class="user-level">레벨 11</p>
+                    </div>
+                </div>
+                <div class="rank-score">
+                    <span class="score-value">42권</span>
+                    <span class="score-label">퀴즈 2720점</span>
+                </div>
+            </div>
+
+            <!-- 3등 -->
+            <div class="rank-item rank-3">
+                <div class="rank-badge bronze">
+                    <span class="medal">🥉</span>
+                </div>
+                <div class="user-info">
+                    <img src="https://i.pravatar.cc/60?img=3" alt="프로필" class="user-avatar">
+                    <div>
+                        <h4>문학소녀박지은</h4>
+                        <p class="user-level">레벨 10</p>
+                    </div>
+                </div>
+                <div class="rank-score">
+                    <span class="score-value">38권</span>
+                    <span class="score-label">퀴즈 2650점</span>
+                </div>
+            </div>
+
+            <!-- 4등 -->
+            <div class="rank-item">
+                <div class="rank-number">4</div>
+                <div class="user-info">
+                    <img src="https://i.pravatar.cc/60?img=4" alt="프로필" class="user-avatar">
+                    <div>
+                        <h4>독서마니아최철수</h4>
+                        <p class="user-level">레벨 9</p>
+                    </div>
+                </div>
+                <div class="rank-score">
+                    <span class="score-value">35권</span>
+                    <span class="score-label">퀴즈 2480점</span>
+                </div>
+            </div>
+
+            <!-- 5등 -->
+            <div class="rank-item">
+                <div class="rank-number">5</div>
+                <div class="user-info">
+                    <img src="https://i.pravatar.cc/60?img=6" alt="프로필" class="user-avatar">
+                    <div>
+                        <h4>책사랑정미영</h4>
+                        <p class="user-level">레벨 9</p>
+                    </div>
+                </div>
+                <div class="rank-score">
+                    <span class="score-value">33권</span>
+                    <span class="score-label">퀴즈 2350점</span>
+                </div>
+            </div>
+
+            <!-- 6등 (본인) -->
+            <div class="rank-item my-rank">
+                <div class="rank-number">6</div>
+                <div class="user-info">
+                    <img src="https://i.pravatar.cc/60?img=5" alt="프로필" class="user-avatar">
+                    <div>
+                        <h4>나 (나) <span class="my-badge">나</span></h4>
+                        <p class="user-level">레벨 4</p>
+                    </div>
+                </div>
+                <div class="rank-score">
+                    <span class="score-value">12권</span>
+                    <span class="score-label">퀴즈 850점</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 도전 과제 섹션 -->
+    <div class="challenge-section">
+        <h3>독서 마스터</h3>
+        <p>월 20권 이상 읽기</p>
+        <div class="progress-container">
+            <div class="progress-text">12/20권</div>
+            <div class="progress-bar-wrapper">
+                <div class="progress-fill" style="width: 60%"></div>
+            </div>
+            <p class="progress-label">850/1000일</p>
+        </div>
+    </div>
+
+    <!-- 달성 업적 -->
+    <div class="achievements-section">
+        <div class="achievement-tabs">
+            
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
