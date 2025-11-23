@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>독서 퀴즈 - 독서 습관 커뮤니티</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!-- 네비게이션 -->
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="로고">
+    </a>
+
+    <ul class="nav-menu">
+        <li><a href="index.html">독서 캘린더</a></li>
+        <li><a href="quiz.html">독서 퀴즈</a></li>
+        <li><a href="ranking.html">순위표</a></li>
+    </ul>
+
+    <div class="nav-buttons">
+        <button class="btn-login">로그인</button>
+        <button class="btn-signup">회원가입</button>
+    </div>
+</nav>
+
+<!-- 히어로 섹션 -->
+<section class="hero hero-quiz">
+    <h1>독서 퀴즈</h1>
+    <p>읽은 책에 대한 이해도를 테스트하고, 다른 독서가들과 함께 퀴즈를 풀어보세요.</p>
+    <button class="btn-start" id="createQuizBtn">새 퀴즈 만들기</button>
+</section>
+
+<!-- 통계 카드 -->
+<section class="stats-section">
+    <div class="stat-card">
+        <div class="stat-icon blue">📝</div>
+        <div class="stat-info">
+            <p class="stat-label">참여한 퀴즈</p>
+            <p class="stat-value" id="statAttempts">0개</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon orange">✅</div>
+        <div class="stat-info">
+            <p class="stat-label">정답률</p>
+            <p class="stat-value" id="statAccuracy">0%</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green">🏆</div>
+        <div class="stat-info">
+            <p class="stat-label">획득 포인트</p>
+            <p class="stat-value" id="statPoints">0P</p>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon purple">📚</div>
+        <div class="stat-info">
+            <p class="stat-label">만든 퀴즈</p>
+            <p class="stat-value" id="statCreated">0개</p>
+        </div>
+    </div>
+</section>
+
+<!-- 탭 메뉴 -->
+<section class="tabs-section">
+    <div class="tabs">
+        <button class="tab" onclick="location.href='index.html'">독서 캘린더</button>
+        <button class="tab active" onclick="location.href='quiz.html'">독서 퀴즈</button>
+        <button class="tab" onclick="location.href='ranking.html'">순위표</button>
+    </div>
+</section>
+
+<!-- 메인 컨텐츠 -->
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h2>독서 퀴즈</h2>
+        <p>책에 대한 이해도를 확인해보세요!</p>
+        <div class="quiz-stats">
+            <span class="quiz-stat-item">현재 정답수: <strong>0점</strong></span>
+        </div>
+    </div>
+
+    <!-- 퀴즈 카드 그리드 -->
+    <div class="quiz-grid">
+        <div class="quiz-card">
+            <div class="quiz-card-header">
+                <span class="quiz-badge easy">쉬움</span>
+                <span class="quiz-author">출제자: 문학소녀박지은</span>
+            </div>
+            <h3 class="quiz-title">어린왕자가 사는 별의 이름은?</h3>
+            <p class="quiz-meta">출제자: 문학소녀박지은</p>
+            <button class="btn-quiz-start">퀴즈 시작</button>
+        </div>
+
+        <div class="quiz-card">
+            <div class="quiz-card-header">
+                <span class="quiz-badge medium">보통</span>
+                <span class="quiz-author">출제자: 책벌레김영희</span>
+            </div>
+            <h3 class="quiz-title">1984</h3>
+            <p class="quiz-meta">소설 1984에서 주인공이 일한 부서는?</p>
+            <button class="btn-quiz-start">퀴즈 시작</button>
+        </div>
+
+        <div class="quiz-card">
+            <div class="quiz-card-header">
+                <span class="quiz-badge medium">보통</span>
+                <span class="quiz-author">출제자: 독서왕이민수</span>
+            </div>
+            <h3 class="quiz-title">해리포터와 마법사의 돌</h3>
+            <p class="quiz-meta">해리포터가 처음 받은 마법 지팡이의 재료는?</p>
+            <button class="btn-quiz-start">퀴즈 시작</button>
+        </div>
+    </div>
+
+    <!-- 퀴즈 만들기 섹션 -->
+    <div class="quiz-create-section">
+        <h3>퀴즈 만들기</h3>
+        <p>읽은 책에 대한 퀴즈를 만들어 다른 독서가들과 공유해보세요!</p>
+        <button class="btn-create-quiz" id="createQuizBtn2">+ 새 퀴즈 만들기</button>
+    </div>
+</div>
+
+
+<!-- 퀴즈 풀기 모달 -->
+<div id="quizModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div>
+                <h2>독서 퀴즈</h2>
+                <p class="quiz-book-title">어린왕자 <span class="quiz-difficulty easy">쉬움</span></p>
+            </div>
+            <button class="modal-close">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="quiz-question-section">
+                <h3>어린왕자가 사는 별의 이름은?</h3>
+            </div>
+
+            <div class="quiz-options">
+                <div class="quiz-option">
+                    <input type="radio" name="quiz-answer" id="option-a" value="A">
+                    <label for="option-a" class="quiz-option-label">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">B-612</span>
+                    </label>
+                </div>
+
+                <div class="quiz-option">
+                    <input type="radio" name="quiz-answer" id="option-b" value="B">
+                    <label for="option-b" class="quiz-option-label">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">B-621</span>
+                    </label>
+                </div>
+
+                <div class="quiz-option">
+                    <input type="radio" name="quiz-answer" id="option-c" value="C">
+                    <label for="option-c" class="quiz-option-label">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">C-612</span>
+                    </label>
+                </div>
+
+                <div class="quiz-option">
+                    <input type="radio" name="quiz-answer" id="option-d" value="D">
+                    <label for="option-d" class="quiz-option-label">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">A-612</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-submit-quiz">정답 제출</button>
+        </div>
+    </div>
+</div>
+
+<!-- 퀴즈 만들기 모달 -->
+<div id="createQuizModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>새 퀴즈 만들기</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label>책 제목 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="퀴즈를 만들 책의 제목을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>저자</label>
+                <input type="text" class="form-input" placeholder="저자명을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>퀴즈 질문 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="퀴즈 질문을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>선택지 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="선택지 A" style="margin-bottom: 0.5rem;">
+                <input type="text" class="form-input" placeholder="선택지 B" style="margin-bottom: 0.5rem;">
+                <input type="text" class="form-input" placeholder="선택지 C" style="margin-bottom: 0.5rem;">
+                <input type="text" class="form-input" placeholder="선택지 D">
+            </div>
+
+            <div class="form-group">
+                <label>정답 <span class="required">*</span></label>
+                <select class="form-select">
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>난이도</label>
+                <select class="form-select">
+                    <option>쉬움</option>
+                    <option>보통</option>
+                    <option>어려움</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>해설 (선택)</label>
+                <textarea class="form-textarea" rows="3" placeholder="정답에 대한 해설을 입력하세요"></textarea>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-cancel">취소</button>
+            <button class="btn-submit">퀴즈 등록하기</button>
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/quiz.js"></script>
+
+<!-- 로그인 모달 -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>로그인</h2>
+            <button class="modal-close" data-modal="login">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>이메일</label>
+                <input type="email" class="form-input" placeholder="이메일을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>비밀번호</label>
+                <input type="password" class="form-input" placeholder="비밀번호를 입력하세요">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-submit btn-full">로그인</button>
+        </div>
+        <div class="modal-signup-link">
+            계정이 없으신가요? <a href="#" id="showSignupFromLogin">회원가입</a>
+        </div>
+    </div>
+</div>
+
+<!-- 회원가입 모달 -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>회원가입</h2>
+            <button class="modal-close" data-modal="signup">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>이름 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="이름을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>이메일 <span class="required">*</span></label>
+                <input type="email" class="form-input" placeholder="이메일을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>비밀번호 <span class="required">*</span></label>
+                <input type="password" class="form-input" placeholder="비밀번호를 입력하세요 (8자 이상)">
+            </div>
+            <div class="form-group">
+                <label>비밀번호 확인 <span class="required">*</span></label>
+                <input type="password" class="form-input" placeholder="비밀번호를 다시 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>닉네임 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="독서 커뮤니티에서 사용할 닉네임">
+            </div>
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox"> <span class="required">*</span> 이용약관에 동의합니다.
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-submit btn-full">회원가입</button>
+        </div>
+        <div class="modal-signup-link">
+            이미 계정이 있으신가요? <a href="#" id="showLoginFromSignup">로그인</a>
+        </div>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/quiz.js"></script>
+</body>
+</html>

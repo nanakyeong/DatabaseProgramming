@@ -1,0 +1,12 @@
+<dependencies>
+    <!-- ...existing code... -->
+    
+    <!-- MySQL Driver -->
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+    
+    <!-- ...existing code... -->
+</dependencies>

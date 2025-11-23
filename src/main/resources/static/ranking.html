@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>독서량 순위표 - 독서 습관 커뮤니티</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="로고">
+    </a>
+
+    <ul class="nav-menu">
+        <li><a href="index.html">독서 캘린더</a></li>
+        <li><a href="quiz.html">독서 퀴즈</a></li>
+        <li><a href="ranking.html">순위표</a></li>
+    </ul>
+
+    <div class="nav-buttons">
+        <button class="btn-login">로그인</button>
+        <button class="btn-signup">회원가입</button>
+    </div>
+</nav>
+
+<section class="hero hero-ranking">
+    <h1>독서량 순위표</h1>
+    <p>다른 독서가들과 함께 성장해보세요!</p>
+</section>
+
+<section class="tabs-section">
+    <div class="tabs">
+        <button class="tab" onclick="location.href='index.html'">독서 캘린더</button>
+        <button class="tab" onclick="location.href='quiz.html'">독서 퀴즈</button>
+        <button class="tab active">순위표</button>
+    </div>
+</section>
+
+<div class="ranking-container">
+    <div class="ranking-tabs">
+        <button class="rank-tab active" data-type="reading">독서왕</button>
+        <button class="rank-tab" data-type="quiz">퀴즈왕</button>
+    </div>
+
+    <div class="my-rank-card" id="myRankCard" style="display: none;">
+    </div>
+
+    <div class="ranking-section">
+        <h2 id="rankingTitle">독서량 순위</h2>
+
+        <div class="ranking-list" id="rankingList">
+            <p style="text-align: center; padding: 20px;">로딩 중...</p>
+        </div>
+    </div>
+
+    <div class="challenge-section">
+        <h3>독서 마스터</h3>
+        <p>월 20권 이상 읽기</p>
+        <div class="progress-container">
+            <div class="progress-text">12/20권</div>
+            <div class="progress-bar-wrapper">
+                <div class="progress-fill" style="width: 60%"></div>
+            </div>
+            <p class="progress-label">850/1000일</p>
+        </div>
+    </div>
+
+    <div class="achievements-section">
+        <div class="achievement-tabs">
+        </div>
+    </div>
+</div>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>로그인</h2>
+            <button class="modal-close" data-modal="login">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>이메일</label>
+                <input type="email" class="form-input" placeholder="이메일을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>비밀번호</label>
+                <input type="password" class="form-input" placeholder="비밀번호를 입력하세요">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-submit btn-full">로그인</button>
+        </div>
+        <div class="modal-signup-link">
+            계정이 없으신가요? <a href="#" id="showSignupFromLogin">회원가입</a>
+        </div>
+    </div>
+</div>
+
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>회원가입</h2>
+            <button class="modal-close" data-modal="signup">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>이름 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="이름을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>이메일 <span class="required">*</span></label>
+                <input type="email" class="form-input" placeholder="이메일을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>비밀번호 <span class="required">*</span></label>
+                <input type="password" class="form-input" placeholder="비밀번호를 입력하세요 (8자 이상)">
+            </div>
+            <div class="form-group">
+                <label>비밀번호 확인 <span class="required">*</span></label>
+                <input type="password" class="form-input" placeholder="비밀번호를 다시 입력하세요">
+            </div>
+            <div class="form-group">
+                <label>닉네임 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="독서 커뮤니티에서 사용할 닉네임">
+            </div>
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox"> <span class="required">*</span> 이용약관에 동의합니다.
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-submit btn-full">회원가입</button>
+        </div>
+        <div class="modal-signup-link">
+            이미 계정이 있으신가요? <a href="#" id="showLoginFromSignup">로그인</a>
+        </div>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/ranking.js"></script>
+</body>
+</html>

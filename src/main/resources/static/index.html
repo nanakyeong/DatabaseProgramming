@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>독서 습관 커뮤니티</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- 네비게이션 -->
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="로고">
+    </a>
+
+    <ul class="nav-menu">
+        <li><a href="index.html">독서 캘린더</a></li>
+        <li><a href="quiz.html">독서 퀴즈</a></li>
+        <li><a href="ranking.html">순위표</a></li>
+    </ul>
+
+    <div class="nav-buttons">
+        <button class="btn-login">로그인</button>
+        <button class="btn-signup">회원가입</button>
+    </div>
+</nav>
+
+<section class="hero hero-calendar">
+    <h1>독서 습관을 만들어보세요</h1>
+    <p>매일 독서 기록을 남기고, 퀴즈로 이해도를 확인하며, 다른 독서가들과 함께 성장하는 독서 커뮤니티입니다.</p>
+    <button class="btn-start">독서 기록 시작하기</button>
+</section>
+
+<section class="stats-section">
+    <div class="stat-card">
+        <div class="stat-icon blue">📖</div>
+        <div class="stat-info">
+            <p class="stat-label">이번 달 독서</p>
+            <p class="stat-value" id="statMonthly">-권</p> </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon orange">🔥</div>
+        <div class="stat-info">
+            <p class="stat-label">연속 독서일</p>
+            <p class="stat-value" id="statConsecutive">-일</p> </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green">☕</div>
+        <div class="stat-info">
+            <p class="stat-label">퀴즈 정답률</p>
+            <p class="stat-value" id="statQuiz">준비중</p> </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon purple">🎯</div>
+        <div class="stat-info">
+            <p class="stat-label">전체 순위</p>
+            <p class="stat-value" id="statRank">준비중</p> </div>
+    </div>
+</section>
+
+<!-- 탭 메뉴 -->
+<section class="tabs-section">
+    <div class="tabs">
+        <button class="tab active" onclick="location.href='index.html'">독서 캘린더</button>
+        <button class="tab" onclick="location.href='quiz.html'">독서 퀴즈</button>
+        <button class="tab" onclick="location.href='ranking.html'">순위표</button>
+    </div>
+</section>
+
+<!-- 메인 컨텐츠 -->
+<div class="main-content">
+    <!-- 캘린더 섹션 -->
+    <div class="calendar-section">
+        <h2>독서 캘린더</h2>
+        <p>날짜를 클릭하여 독서 기록을 추가하세요.</p>
+
+        <div class="calendar">
+            <div class="calendar-header">
+                <!-- ID 추가됨: prevBtn, currentMonthYear, nextBtn -->
+                <button class="nav-btn" id="prevBtn">❮</button>
+                <h3 id="currentMonthYear">2025년 7월</h3>
+                <button class="nav-btn" id="nextBtn">❯</button>
+            </div>
+
+            <div class="calendar-legend">
+                <span><span class="dot light-green"></span> 조금 읽음</span>
+                <span><span class="dot medium-green"></span> 많이 읽음</span>
+                <span><span class="dot dark-green"></span> 완독</span>
+            </div>
+
+            <!-- ID 추가됨: calendarGrid -->
+            <!-- 내부는 JS로 채워지므로 비워둡니다 (요일 헤더도 JS에서 처리 가능하지만, 구조 유지를 위해 JS가 덮어쓰도록 함) -->
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- 자바스크립트가 이곳에 요일 헤더와 날짜를 생성합니다 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+        <div class="widget">
+            <h3>이번 주 독서 목표</h3>
+            <div class="goal-info">
+                <p class="goal-label">주간 목표</p>
+                <p class="goal-value" id="goalValue">5권</p> </div>
+            <div class="progress-bar">
+                <div class="progress" id="goalProgressBar" style="width: 0%"></div>
+            </div>
+            <div class="goal-status">
+                <span>진행률</span>
+                <span id="goalStatus">0/5권 (0%)</span>
+            </div>
+        </div>
+
+        <div class="widget">
+            <h3>최근 독서 기록</h3>
+            <ul class="reading-list" id="recentList">
+                <li style="color: #666; font-size: 0.9rem;">기록이 없습니다.</li>
+            </ul>
+        </div>
+    </aside>
+</div>
+
+
+<!-- 독서 기록 추가 모달 -->
+<div id="readingModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>독서 기록 추가</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="selected-date">
+                <p class="date-label">선택한 날짜</p>
+                <p class="date-value" id="modalDateValue">2025년 7월 5일</p>
+            </div>
+
+            <div class="form-group">
+                <label>책 제목 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="읽은 책의 제목을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>저자</label>
+                <input type="text" class="form-input" placeholder="저자명을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>읽은 페이지 수</label>
+                <input type="number" class="form-input" placeholder="읽은 페이지 수를 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>읽기 상태 <span class="required">*</span></label>
+                <select class="form-select">
+                    <option>읽는 중</option>
+                    <option>완독</option>
+                    <option>읽기 시작</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>평점</label>
+                <div class="rating-stars">
+                    <span class="star" data-rating="1">☆</span>
+                    <span class="star" data-rating="2">☆</span>
+                    <span class="star" data-rating="3">☆</span>
+                    <span class="star" data-rating="4">☆</span>
+                    <span class="star" data-rating="5">☆</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>독서 메모</label>
+                <textarea class="form-textarea" rows="4" placeholder="책에 대한 감상이나 메모를 남겨보세요"></textarea>
+                <p class="char-count">0/500</p>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-cancel">취소</button>
+            <button class="btn-submit">저장하기</button>
+        </div>
+    </div>
+</div>
+
+<!-- 로그인 모달 -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>로그인</h2>
+            <button class="modal-close" data-modal="login">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label>이메일</label>
+                <input type="email" class="form-input" placeholder="이메일을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>비밀번호</label>
+                <input type="password" class="form-input" placeholder="비밀번호를 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox"> 로그인 상태 유지
+                </label>
+                <a href="#" class="forgot-password">비밀번호 찾기</a>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-submit btn-full">로그인</button>
+        </div>
+
+        <div class="modal-signup-link">
+            계정이 없으신가요? <a href="#" id="showSignupFromLogin">회원가입</a>
+        </div>
+    </div>
+</div>
+
+<!-- 회원가입 모달 -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>회원가입</h2>
+            <button class="modal-close" data-modal="signup">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label>이름 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="이름을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>이메일 <span class="required">*</span></label>
+                <input type="email" class="form-input" placeholder="이메일을 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>비밀번호 <span class="required">*</span></label>
+                <input type="password" class="form-input" placeholder="비밀번호를 입력하세요 (8자 이상)">
+            </div>
+
+            <div class="form-group">
+                <label>비밀번호 확인 <span class="required">*</span></label>
+                <input type="password" class="form-input" placeholder="비밀번호를 다시 입력하세요">
+            </div>
+
+            <div class="form-group">
+                <label>닉네임 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="독서 커뮤니티에서 사용할 닉네임">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-submit btn-full">회원가입</button>
+        </div>
+
+        <div class="modal-signup-link">
+            이미 계정이 있으신가요? <a href="#" id="showLoginFromSignup">로그인</a>
+        </div>
+    </div>
+</div>
+
+<!-- JS 연결: calendar.js 추가됨 -->
+<script src="js/modal.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/calendar.js"></script>
+</body>
+</html>
