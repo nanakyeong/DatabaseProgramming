@@ -47,4 +47,7 @@ public class ReadingRecord {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @Column(length = 1000)
+    private String coverUrl;
 }

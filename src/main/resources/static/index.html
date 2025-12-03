@@ -5,10 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>독서 습관 커뮤니티</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* 검색 버튼 및 미리보기 스타일 */
+        .input-group { display: flex; gap: 10px; }
+        .btn-search { padding: 0 1rem; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; white-space: nowrap; }
+        .btn-search:hover { background: #5a6fd6; }
+        #coverPreview { margin-top: 10px; text-align: center; background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px dashed #ddd; }
+        #coverPreview img { max-height: 150px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .search-result-item { display: flex; gap: 15px; padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.2s; }
+        .search-result-item:hover { background: #f0f7ff; }
+        .search-result-item img { width: 50px; height: 75px; object-fit: cover; border-radius: 4px; background: #eee; }
+
+        /* 마이페이지 탭 스타일 */
+        .mypage-tabs { display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .tab-link { background: none; border: none; padding: 10px 5px; cursor: pointer; font-size: 1rem; color: #666; transition: color 0.3s; }
+        .tab-link.active { color: #667eea; font-weight: bold; border-bottom: 2px solid #667eea; }
+        .tab-link.danger.active { color: #f44336; border-bottom-color: #f44336; }
+    </style>
 </head>
 <body>
 
-<!-- 네비게이션 -->
 <nav class="navbar">
     <a href="index.html" class="logo">
         <img src="images/logo.png" alt="로고">
@@ -59,7 +75,6 @@
     </div>
 </section>
 
-<!-- 탭 메뉴 -->
 <section class="tabs-section">
     <div class="tabs">
         <button class="tab active" onclick="location.href='index.html'">독서 캘린더</button>
@@ -68,16 +83,13 @@
     </div>
 </section>
 
-<!-- 메인 컨텐츠 -->
 <div class="main-content">
-    <!-- 캘린더 섹션 -->
     <div class="calendar-section">
         <h2>독서 캘린더</h2>
         <p>날짜를 클릭하여 독서 기록을 추가하세요.</p>
 
         <div class="calendar">
             <div class="calendar-header">
-                <!-- ID 추가됨: prevBtn, currentMonthYear, nextBtn -->
                 <button class="nav-btn" id="prevBtn">❮</button>
                 <h3 id="currentMonthYear">2025년 7월</h3>
                 <button class="nav-btn" id="nextBtn">❯</button>
@@ -89,15 +101,11 @@
                 <span><span class="dot dark-green"></span> 완독</span>
             </div>
 
-            <!-- ID 추가됨: calendarGrid -->
-            <!-- 내부는 JS로 채워지므로 비워둡니다 (요일 헤더도 JS에서 처리 가능하지만, 구조 유지를 위해 JS가 덮어쓰도록 함) -->
             <div class="calendar-grid" id="calendarGrid">
-                <!-- 자바스크립트가 이곳에 요일 헤더와 날짜를 생성합니다 -->
             </div>
         </div>
     </div>
 
-    <!-- 사이드바 -->
     <aside class="sidebar">
         <div class="widget">
             <h3>이번 주 독서 목표</h3>
@@ -123,7 +131,6 @@
 </div>
 
 
-<!-- 독서 기록 추가 모달 -->
 <div id="readingModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -139,22 +146,30 @@
 
             <div class="form-group">
                 <label>책 제목 <span class="required">*</span></label>
-                <input type="text" class="form-input" placeholder="읽은 책의 제목을 입력하세요">
+                <div class="input-group">
+                    <input type="text" class="form-input" id="inputTitle" placeholder="읽은 책의 제목을 입력하세요">
+                    <button type="button" class="btn-search" id="btnOpenSearch">책 검색</button>
+                </div>
+                <div id="coverPreview" style="display: none;">
+                    <img id="previewImg" src="" alt="책 표지">
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">선택된 도서 표지</p>
+                </div>
+                <input type="hidden" id="inputCoverUrl">
             </div>
 
             <div class="form-group">
                 <label>저자</label>
-                <input type="text" class="form-input" placeholder="저자명을 입력하세요">
+                <input type="text" class="form-input" id="inputAuthor" placeholder="저자명을 입력하세요">
             </div>
 
             <div class="form-group">
                 <label>읽은 페이지 수</label>
-                <input type="number" class="form-input" placeholder="읽은 페이지 수를 입력하세요">
+                <input type="number" class="form-input" id="inputPages" placeholder="읽은 페이지 수를 입력하세요">
             </div>
 
             <div class="form-group">
                 <label>읽기 상태 <span class="required">*</span></label>
-                <select class="form-select">
+                <select class="form-select" id="inputStatus">
                     <option>읽는 중</option>
                     <option>완독</option>
                     <option>읽기 시작</option>
@@ -186,89 +201,133 @@
     </div>
 </div>
 
-<!-- 로그인 모달 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content" style="max-width: 500px; height: 600px; display: flex; flex-direction: column;">
+        <div class="modal-header">
+            <h2>책 검색</h2>
+            <button class="modal-close" data-target="searchModal">&times;</button>
+        </div>
+        <div class="modal-body" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <input type="text" id="searchQuery" class="form-input" placeholder="책 제목을 입력하세요">
+                <button id="btnSearchAction" class="btn-submit" style="width: 80px;">검색</button>
+            </div>
+            <div id="searchResultList" style="flex: 1; overflow-y: auto; border: 1px solid #eee; border-radius: 5px; padding: 5px;">
+                <p style="text-align: center; color: #999; margin-top: 20px;">검색어를 입력하고 버튼을 누르세요.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h2>로그인</h2>
             <button class="modal-close" data-modal="login">&times;</button>
         </div>
-
         <div class="modal-body">
             <div class="form-group">
                 <label>이메일</label>
                 <input type="email" class="form-input" placeholder="이메일을 입력하세요">
             </div>
-
             <div class="form-group">
                 <label>비밀번호</label>
                 <input type="password" class="form-input" placeholder="비밀번호를 입력하세요">
             </div>
-
-            <div class="form-group">
-                <label class="checkbox-label">
-                    <input type="checkbox"> 로그인 상태 유지
-                </label>
-                <a href="#" class="forgot-password">비밀번호 찾기</a>
-            </div>
         </div>
-
         <div class="modal-footer">
             <button class="btn-submit btn-full">로그인</button>
         </div>
-
         <div class="modal-signup-link">
             계정이 없으신가요? <a href="#" id="showSignupFromLogin">회원가입</a>
         </div>
     </div>
 </div>
 
-<!-- 회원가입 모달 -->
 <div id="signupModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h2>회원가입</h2>
             <button class="modal-close" data-modal="signup">&times;</button>
         </div>
-
         <div class="modal-body">
             <div class="form-group">
                 <label>이름 <span class="required">*</span></label>
                 <input type="text" class="form-input" placeholder="이름을 입력하세요">
             </div>
-
             <div class="form-group">
                 <label>이메일 <span class="required">*</span></label>
                 <input type="email" class="form-input" placeholder="이메일을 입력하세요">
             </div>
-
             <div class="form-group">
                 <label>비밀번호 <span class="required">*</span></label>
                 <input type="password" class="form-input" placeholder="비밀번호를 입력하세요 (8자 이상)">
             </div>
-
             <div class="form-group">
                 <label>비밀번호 확인 <span class="required">*</span></label>
                 <input type="password" class="form-input" placeholder="비밀번호를 다시 입력하세요">
             </div>
-
             <div class="form-group">
                 <label>닉네임 <span class="required">*</span></label>
                 <input type="text" class="form-input" placeholder="독서 커뮤니티에서 사용할 닉네임">
             </div>
         </div>
-
         <div class="modal-footer">
             <button class="btn-submit btn-full">회원가입</button>
         </div>
-
         <div class="modal-signup-link">
             이미 계정이 있으신가요? <a href="#" id="showLoginFromSignup">로그인</a>
         </div>
     </div>
 </div>
 
-<!-- JS 연결: calendar.js 추가됨 -->
+<div id="mypageModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>마이페이지</h2>
+            <button class="modal-close" data-modal="mypage">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="mypage-tabs">
+                <button class="tab-link active" data-tab="profile">정보 수정</button>
+                <button class="tab-link danger" data-tab="withdraw">회원 탈퇴</button>
+            </div>
+
+            <div id="tab-profile" class="tab-content">
+                <div class="form-group">
+                    <label>닉네임</label>
+                    <input type="text" id="editNickname" class="form-input" placeholder="변경할 닉네임">
+                </div>
+                <div class="form-group">
+                    <label>프로필 이미지 URL</label>
+                    <input type="text" id="editProfileUrl" class="form-input" placeholder="이미지 URL 입력 (선택)">
+                </div>
+                <div class="form-group">
+                    <label>새 비밀번호 (변경 시에만 입력)</label>
+                    <input type="password" id="editNewPassword" class="form-input" placeholder="새 비밀번호">
+                </div>
+                <div class="form-group">
+                    <label>현재 비밀번호 (본인 확인용) <span class="required">*</span></label>
+                    <input type="password" id="editCurrentPassword" class="form-input" placeholder="현재 비밀번호를 입력하세요">
+                </div>
+                <button id="btnUpdateProfile" class="btn-submit btn-full">정보 수정하기</button>
+            </div>
+
+            <div id="tab-withdraw" class="tab-content" style="display: none;">
+                <div style="background: #fff0f0; color: #d32f2f; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem;">
+                    <strong>⚠️ 경고</strong><br>
+                    탈퇴 시 작성한 독서 기록과 퀴즈 기록이 모두 영구적으로 삭제되며 복구할 수 없습니다.
+                </div>
+                <div class="form-group">
+                    <label>비밀번호 확인 <span class="required">*</span></label>
+                    <input type="password" id="withdrawPassword" class="form-input" placeholder="비밀번호를 입력하세요">
+                </div>
+                <button id="btnWithdraw" class="btn-submit btn-full" style="background: #f44336; border-color: #f44336;">회원 탈퇴하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="js/modal.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/calendar.js"></script>

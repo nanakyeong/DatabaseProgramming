@@ -15,4 +15,5 @@ public class ReadingRecordDto {
     private Integer rating;
     private String memo;
     private LocalDate readingDate;
+    private String coverUrl;
 }

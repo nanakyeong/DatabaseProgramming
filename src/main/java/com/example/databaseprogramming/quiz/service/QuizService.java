@@ -9,12 +9,12 @@ import com.example.databaseprogramming.quiz.entity.QuizAttempt;
 import com.example.databaseprogramming.quiz.repository.QuizAttemptRepository;
 import com.example.databaseprogramming.quiz.repository.QuizRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page; // 추가
+import org.springframework.data.domain.Pageable; // 추가
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,9 +24,10 @@ public class QuizService {
     private final QuizAttemptRepository quizAttemptRepository;
     private final UserRepository userRepository;
 
-    // 퀴즈 생성
+    // 퀴즈 생성 (기존 유지)
     @Transactional
     public void createQuiz(QuizDto dto) {
+        // ... (기존 코드와 동일)
         User user = userRepository.findById(dto.getCreatorId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
@@ -47,10 +48,11 @@ public class QuizService {
         quizRepository.save(quiz);
     }
 
-    // 퀴즈 목록 조회
+    // [수정] 퀴즈 목록 조회 (페이징 적용)
     @Transactional(readOnly = true)
-    public List<QuizDto> getAllQuizzes() {
-        return quizRepository.findAllByOrderByCreatedAtDesc().stream()
+    public Page<QuizDto> getAllQuizzes(Pageable pageable) {
+        // Repository가 Page<Quiz>를 반환하므로 map을 통해 DTO로 변환
+        return quizRepository.findAllByOrderByCreatedAtDesc(pageable)
                 .map(q -> QuizDto.builder()
                         .id(q.getId())
                         .creatorName(q.getCreator().getNickname())
@@ -61,14 +63,13 @@ public class QuizService {
                         .optionC(q.getOptionC())
                         .optionD(q.getOptionD())
                         .difficulty(q.getDifficulty())
-                        // 정답과 해설은 목록 조회 시 숨김 (풀 때 확인)
-                        .build())
-                .collect(Collectors.toList());
+                        .build());
     }
 
-    // 퀴즈 풀기 (정답 확인 및 기록 저장)
+    // solveQuiz, getUserStats 등 나머지 메서드는 기존 유지...
     @Transactional
     public Map<String, Object> solveQuiz(QuizSolveRequest request) {
+        // ... (기존 코드 생략 - 변경 없음)
         Quiz quiz = quizRepository.findById(request.getQuizId())
                 .orElseThrow(() -> new IllegalArgumentException("Quiz not found"));
         User user = userRepository.findById(request.getUserId())
@@ -94,20 +95,18 @@ public class QuizService {
 
     @Transactional(readOnly = true)
     public Map<String, Object> getUserStats(Long userId) {
+        // ... (기존 코드 생략 - 변경 없음)
         int totalAttempts = quizAttemptRepository.countByUserId(userId);
         int correctCount = quizAttemptRepository.countByUserIdAndIsCorrectTrue(userId);
         int accuracy = totalAttempts == 0 ? 0 : (int)((double)correctCount / totalAttempts * 100);
 
-        // [추가] 내가 만든 퀴즈 개수 조회
         int createdCount = quizRepository.countByCreatorId(userId);
 
         return Map.of(
                 "totalAttempts", totalAttempts,
                 "accuracy", accuracy,
-                "points", correctCount * 10, // 문제당 10점
-                "createdCount", createdCount // [추가]
+                "points", correctCount * 10,
+                "createdCount", createdCount
         );
     }
-
-
 }
