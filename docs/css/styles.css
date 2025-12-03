@@ -1,0 +1,1038 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/* 네비게이션 */
+.navbar {
+    background: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    display: flex; /* 이미지를 수직 중앙 정렬하기 위해 */
+    align-items: center;
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.logo img {
+    height: 40px; /* 로고 높이 조절 (네비게이션 바 크기에 맞춤) */
+    width: auto;  /* 비율 유지 */
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #4CAF50;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-login, .btn-signup {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-login {
+    background: transparent;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+.btn-login:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-signup {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-signup:hover {
+    background: #45a049;
+}
+
+/* 히어로 섹션 */
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.hero {
+    background-size: cover;       /* 화면 꽉 채우기 */
+    background-position: center;  /* 중앙 정렬 */
+    background-repeat: no-repeat;
+    position: relative;           /* 위치 기준점 */
+}
+
+/* 1. 캘린더 페이지 배경 (따뜻하고 편안한 느낌) */
+.hero-calendar {
+    /* 배경 이미지 경로를 실제 파일명으로 수정해주세요 */
+    background-image: linear-gradient(rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85)),
+    url('../images/index.png');
+}
+
+/* 2. 퀴즈 페이지 배경 (지적이고 차분한 느낌) */
+.hero-quiz {
+    background-image: linear-gradient(rgba(44, 62, 80, 0.85), rgba(76, 161, 175, 0.8)),
+    url('../images/quiz.png');
+}
+
+/* 3. 순위표 페이지 배경 (상승하는 느낌, 골드/퍼플 톤) */
+.hero-ranking {
+    background-image: linear-gradient(rgba(255, 153, 102, 0.8), rgba(255, 94, 98, 0.8)),
+    url('../images/ranking.png');
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-start {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.3s;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+}
+
+/* 통계 섹션 */
+.stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: -1rem auto 1rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.stat-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 1rem;
+}
+
+.stat-info {
+    text-align: center;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 탭 섹션 */
+.tabs-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tabs {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab {
+    padding: 1rem 2rem;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.3s;
+}
+
+.tab:hover {
+    color: #4CAF50;
+}
+
+.tab.active {
+    color: #4CAF50;
+    border-bottom-color: #4CAF50;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 캘린더 */
+.calendar-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.calendar-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.calendar-section > p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.calendar {
+    margin-top: 1.5rem;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-header h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.calendar-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.dot.light-green { background: #c8e6c9; }
+.dot.medium-green { background: #81c784; }
+.dot.dark-green { background: #4CAF50; }
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.day-header {
+    text-align: center;
+    font-weight: 600;
+    padding: 0.5rem;
+    color: #666;
+}
+
+.day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    font-weight: 500;
+}
+
+.day:hover:not(.empty) {
+    background: #f8f9fa;
+    transform: scale(1.08);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.day.empty {
+    visibility: hidden;
+}
+
+.day.reading-light {
+    background: #c8e6c9;
+    color: #2e7d32;
+}
+
+.day.reading-medium {
+    background: #81c784;
+    color: #1b5e20;
+}
+
+.day.reading-complete {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.day.has-dot::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    width: 4px;
+    height: 4px;
+    background: #ff5722;
+    border-radius: 50%;
+}
+
+/* 사이드바 */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.widget {
+    background: white;
+    padding: 1.8rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.widget h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+}
+
+.goal-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50 0%, #81c784 100%);
+    transition: width 0.3s;
+}
+
+.goal-status {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.reading-list {
+    list-style: none;
+}
+
+.reading-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.reading-item:last-child {
+    border-bottom: none;
+}
+
+.book-info h4 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.book-info p {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge.complete {
+    background: #e8f5e9;
+    color: #4CAF50;
+}
+
+.badge.reading {
+    background: #fff3e0;
+    color: #ff9800;
+}
+
+/* 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.required {
+    color: #f44336;
+}
+
+.btn-cancel, .btn-submit {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-cancel {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.btn-submit, .btn-full {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.modal-signup-link {
+    text-align: center;
+    padding: 1rem;
+    color: #666;
+}
+
+.modal-signup-link a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* 퀴즈 페이지 */
+.quiz-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.quiz-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.quiz-header p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.quiz-stats {
+    display: inline-block;
+    background: #f5f5f5;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.quiz-card {
+    background: white;
+    padding: 1.8rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.quiz-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.quiz-author {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.quiz-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.quiz-meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.btn-quiz-start {
+    width: 100%;
+    padding: 0.85rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-quiz-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.quiz-create-section {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.quiz-create-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.quiz-create-section p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.btn-create-quiz {
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-create-quiz:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* 랭킹 페이지 */
+.ranking-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem;
+}
+
+/* 내 순위 카드 */
+.my-rank-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.my-rank-badge {
+    text-align: center;
+}
+
+.my-rank-badge .rank-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.my-rank-badge .rank-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    margin-left: 2rem;
+}
+
+.profile-avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.profile-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.profile-info p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.rank-stats {
+    text-align: right;
+}
+
+.rank-stats p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* 독서량 순위 섹션 */
+.ranking-section {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.ranking-section h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.rank-tab {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #666;
+    margin-right: 10px;
+    transition: all 0.2s;
+    margin-bottom: 15px;
+}
+
+.rank-tab.active {
+    background-color: #6c5ce7; /* 메인 테마색 */
+    color: white;
+}
+
+.rank-tab:hover:not(.active) {
+    background-color: #e0e0e0;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #fafafa;
+    border-radius: 15px;
+    transition: all 0.3s;
+}
+
+.rank-item:hover {
+    background: #f5f5f5;
+    transform: translateX(5px);
+}
+
+.rank-item.my-rank {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border: 2px solid #667eea;
+}
+
+.rank-badge {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.rank-badge.gold {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+}
+
+.rank-badge.silver {
+    background: linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%);
+}
+
+.rank-badge.bronze {
+    background: linear-gradient(135deg, #CD7F32 0%, #B87333 100%);
+}
+
+.rank-number {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #666;
+    background: white;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.user-level {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.my-badge {
+    background: #667eea;
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+.rank-score {
+    text-align: right;
+}
+
+.score-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.score-label {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* 퀴즈 옵션 개선 */
+.quiz-option input {
+    display: none;
+}
+
+.quiz-option-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.quiz-option-label:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.option-letter {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-radius: 50%;
+    font-weight: bold;
+    color: #666;
+}
+
+.quiz-option input:checked + .quiz-option-label {
+    border-color: #667eea;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.quiz-option input:checked + .quiz-option-label .option-letter {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* 도전 과제 섹션 */
+.challenge-section {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(129, 199, 132, 0.1) 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+
+.challenge-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #2e7d32;
+}
+
+.challenge-section p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.progress-container {
+    margin-top: 1rem;
+}
+
+.progress-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar-wrapper {
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50 0%, #81c784 100%);
+    transition: width 0.3s;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: right;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+
+    .my-rank-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .user-profile {
+        margin-left: 0;
+        margin-top: 1rem;
+        flex-direction: column;
+    }
+
+    .rank-stats {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .quiz-grid {
+        grid-template-columns: 1fr;
+    }
+}
